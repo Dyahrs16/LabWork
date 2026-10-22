@@ -1,8 +1,8 @@
 ---
 title: "Lab 03 Preparing Data for Visualization"
 subtitle: "RE 519 Data Analytics and Visualization | Autumn 2026"
-author: "" #remember to add to your name when you submit the lab
-date: ""
+author: "Dyah S" #remember to add to your name when you submit the lab
+date: "`r sys.Date()`"
 output:
   cleanrmd::html_document_clean:
     theme: almond
