@@ -22,13 +22,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <!-- start of the main lab content -->
 
-In lab 3, we are going to explore tidy data, start to visualize data using R, and look at GitHub. The primary dataset we are using is [Zillow Home Value Index (ZHVI)](https://www.zillow.com/research/data/), a measure of the typical home value and market changes across a given region and housing type. More information about what ZHVI is and how it’s calculated is available on [this overview page](https://www.zillow.com/research/methodology-neural-zhvi-32128/).
-
-The submission should include Rmd, html, and any other files required to rerun the codes. **For Lab 1–3, the use of any generative AI tool (ChatGPT, Copilot, etc.) is prohibited**. We will run AI detection on each submission. 
-
-> **Recommended Reading** <br> [Chapter 2, 6, Modern Data Science with R. Baumer et al. 2024.](https://mdsr-book.github.io/mdsr3e) <br> [Tidy Data, *The Journal of Statistical Software*, Hadley Wickham, 2014.](https://vita.had.co.nz/papers/tidy-data.html)
-
-------------------------------------------------------------------------
 
 ## Lab 03-A: Tidy Data
 
