@@ -1,0 +1,5 @@
+"0","g <- g + geom_line(aes(color = RegionName),"
+"0","              alpha = 0.8, # Opacity: 0 means fully transparent (invisible)"
+"0","              linetype = 6, # 6 = twodash, you can check more option using `?linetype` "
+"0","              linewidth = 0.8) # linewidth"
+"0","g"

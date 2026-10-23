@@ -21,9 +21,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ------------------------------------------------------------------------
 
 <!-- start of the main lab content -->
+
 In lab 3, we are going to explore tidy data, start to visualize data using R, and look at GitHub. The primary dataset we are using is [Zillow Home Value Index (ZHVI)](https://www.zillow.com/research/data/), a measure of the typical home value and market changes across a given region and housing type. More information about what ZHVI is and how it’s calculated is available on [this overview page](https://www.zillow.com/research/methodology-neural-zhvi-32128/).
 
-The submission should include Rmd, html, and any other files required to rerun the codes. **For Lab 1–3, the use of any generative AI tool (ChatGPT, Copilot, etc.) is prohibited**. We will run AI detection on each submission. 
+The submission should include Rmd, html, and any other files required to rerun the codes. **For Lab 1–3, the use of any generative AI tool (ChatGPT, Copilot, etc.) is prohibited**. We will run AI detection on each submission.
 
 > **Recommended Reading** <br> [Chapter 2, 6, Modern Data Science with R. Baumer et al. 2024.](https://mdsr-book.github.io/mdsr3e) <br> [Tidy Data, *The Journal of Statistical Software*, Hadley Wickham, 2014.](https://vita.had.co.nz/papers/tidy-data.html)
 
@@ -76,8 +77,8 @@ Like families, tidy datasets are all alike but every messy dataset is messy in i
 
 A dataset is a collection of **values**, usually either numbers or strings. Values are organised in two ways: every value belongs to a variable and an observation.
 
--   A **variable** contains all values that measure the same underlying attribute (like height, temperature, duration) across units.
--   An **observation** contains all values measured on the same unit (like a person, or a day, or a race) across attributes.
+- A **variable** contains all values that measure the same underlying attribute (like height, temperature, duration) across units.
+- An **observation** contains all values measured on the same unit (like a person, or a day, or a race) across attributes.
 
 ```{r}
 head(hvi, 2)
@@ -85,11 +86,11 @@ head(hvi, 2)
 
 Look at our `hvi` dataset, it contains 9,360 values representing **312** variables and **30** observations. The variables are:
 
--   `RegionID`: a unique regional ID defined by Zillow
--   `RegionalName`: the name of 30 MSA
--   `Popu2024`: the population of MSA in 2024 based on US Census Bureau
--   `StateName`: state name
--   308 columns representing dates: Housing Value Index on that date
+- `RegionID`: a unique regional ID defined by Zillow
+- `RegionalName`: the name of 30 MSA
+- `Popu2024`: the population of MSA in 2024 based on US Census Bureau
+- `StateName`: state name
+- 308 columns representing dates: Housing Value Index on that date
 
 A tidy version of the data looks like this:
 
@@ -111,12 +112,12 @@ head(hvi_tidy, 2)
 
 Look at our `hvi_tidy` dataset again, it contains 9,360 values representing **6** variables and **9,240** observations. The variables are:
 
--   `RegionID`: a unique regional ID defined by Zillow
--   `RegionalName`: the name of 30 MSA
--   `Popu2024`: the population of MSA in 2024 based on US Census Bureau
--   `StateName`: state name
--   `Date`: **NEW** - observation date
--   `HVI`: **NEW** - Housing Value Index from Zillow
+- `RegionID`: a unique regional ID defined by Zillow
+- `RegionalName`: the name of 30 MSA
+- `Popu2024`: the population of MSA in 2024 based on US Census Bureau
+- `StateName`: state name
+- `Date`: **NEW** - observation date
+- `HVI`: **NEW** - Housing Value Index from Zillow
 
 The tidy data frame explicitly tells us the definition of an observation. Every combination of `RegionName` and `Date` is a single measured observation (`HVI`). It's important to clearly define **what is an observation**. In the case of HVI, we are interested in HVI for sure! For an observation, such as `220834.8`, we need know two information: region and date.
 
@@ -124,9 +125,9 @@ The tidy data frame explicitly tells us the definition of an observation. Every 
 
 In tidy data:
 
--   Each variable is a column; each column is a variable.
--   Each observation is a row; each row is an observation.
--   Each value is a cell; each cell is a single value.
+- Each variable is a column; each column is a variable.
+- Each observation is a row; each row is an observation.
+- Each value is a cell; each cell is a single value.
 
 Tidy data makes it easy for an analyst or a computer to extract needed variables because it provides a standard way of structuring a dataset. Tidy data is particularly well suited for vectorised programming languages like R, because the layout ensures that values of different variables from the same observation are always paired. Many R packages, such as `ggplot2` are designed around the tidy data principles.
 
@@ -159,7 +160,7 @@ We can remove NA or smooth/impute them based on their neighbors. We will just re
 
 ```{r}
 # remove NA then we can see there are 9237 rows afterwards, 3 missing values are removed
-hvi_tidy_NA_remove <- hvi_tidy %>% 
+hvi_tidy_NA_remove <- hvi_tidy |> 
   filter(!is.na(HVI))
 dim(hvi_tidy_NA_remove)
 ```
@@ -341,8 +342,8 @@ A box and whisker plot (also referred to as boxplot) provides a compact summary 
 1.  a box defined by the 25th and 75th percentiles
 2.  a horizontal line or point on the box at the median
 3.  vertical lines (whiskers) drawn from each hinge (quartile) to the extreme value.
-    -   Q1 − S / Q3 + S
-    -   the span (S) is calculated as: S = 1.5 x (75th percentile - 25th percentile)
+    - Q1 − S / Q3 + S
+    - the span (S) is calculated as: S = 1.5 x (75th percentile - 25th percentile)
 4.  outliers: any observation outside this span (Q1 − S or Q3 + S)
 
 ![Box Plot Framework. Source: Nathan Yau (2024). Visualize This](assets/boxplot.jpg)
@@ -487,7 +488,7 @@ Using [the National Mortgage Database (NMBD)](https://www.fhfa.gov/data/national
 
 1.  Skim the data and report basic summary statistics such as mean, median, min/max, 25th/75th percentiles, for both Washington State and the rest of the US (exclude Washington State).
 2.  The dataset you downloaded is likely in long format — where each observation occupies one row. Please convert it into wide format. However, when creating visualizations in ggplot2, continue using the long-format data, since it works best with the grammar of graphics.
-    -   Report the number of rows and columns before and after pivoting.
+    - Report the number of rows and columns before and after pivoting.
 3.  Create 3 \~ 4 diagrams that would make sense as well as tell an interesting story. For example, you may want to connect state-level statistics from ACS with the NMDB data (make sure you are comparing data from the same year).
 4.  Add one paragraph explaining your results and charts.
 
@@ -498,3 +499,6 @@ Using [the National Mortgage Database (NMBD)](https://www.fhfa.gov/data/national
 ## Acknowledgement
 
 The materials are developed by [Haoyu Yue](www.yuehaoyu.com) based materials from [Dr. Feiyang Sun at UC San Diego](https://fsun.ucsd.edu), Siman Ning and Christian Phillips at University of Washington, [Dr. Charles Lanfear at University of Cambridge](https://clanfear.github.io).
+
+## Test on Zoo
+

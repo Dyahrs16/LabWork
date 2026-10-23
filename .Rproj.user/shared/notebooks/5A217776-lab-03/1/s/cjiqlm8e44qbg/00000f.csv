@@ -1,0 +1,3 @@
+"0","g <- g + scale_y_continuous(labels = scales::comma, # format numbers with commas"
+"0","                            trans = ""log10"") # apply base-10 log transformation"
+"0","g"

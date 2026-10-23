@@ -1,0 +1,2 @@
+"0","hvi_pnw <- hvi_tidy_NA_remove %>% "
+"0","  filter(RegionName %in% c(""Seattle, WA"", ""Portland, OR""))"
