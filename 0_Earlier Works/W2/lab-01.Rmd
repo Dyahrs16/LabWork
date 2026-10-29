@@ -418,8 +418,8 @@ To use `tidycensus`, we need load the package and have a Census API key. A key c
 
 ```{r message=FALSE}
 # remove the following '#' to install the `tidycensus` and `tidyverse` package; `tidyverse` will be most common-used package for use in the future
-# install.packages("tidycensus")
-# install.packages("tidyverse")
+install.packages("tidycensus")
+install.packages("tidyverse")
 
 # This loads packages into the current session; however, it is best practice to load all packages at the start of an R Markdown document
 library(tidycensus) 
@@ -427,7 +427,7 @@ library(tidyverse)
 ```
 
 ```{r, include=FALSE}
-census_api_key("96f943fd5b38142362574386830d3c855e82dd28")
+census_api_key(Sys.getenv('CENSUS_API_KEY"))
 ```
 
 Get ACS data for King County, Washington State, using the `get_acs()` function. The `table` argument specifies the ACS table code (B25075) for housing value. The `geography` argument specifies the level of geography (tract-level). The `state` and `county` arguments specify the state and county codes. The `year` argument specifies the year of the ACS data. The `labels` argument is set to TRUE to include label descriptions.
