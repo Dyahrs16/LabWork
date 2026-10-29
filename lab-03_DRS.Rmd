@@ -173,8 +173,12 @@ Instead of omitting those missing values, let's try filling missing values in `h
 
 [The documentation](https://www.rdocumentation.org/packages/zoo/versions/1.8-14/topics/na.approx) and [this post](https://www.spsanderson.com/steveondata/posts/2024-11-28/) may be helpful to you!
 
+#### To Do 1
+
 ```{r}
-# TODO
+hvi_tidy_Interpolate1 <- hvi_tidy |> 
+  mutate(hvi_zoo = na.approx(HVI)) |> 
+  view()
 ```
 
 ------------------------------------------------------------------------
@@ -188,6 +192,10 @@ Exploratory Data Analysis (EDA) is the process of summarizing, visualizing, and 
 ### Skim Datasets
 
 The first step of Exploratory Data Analysis (EDA) is to quickly check the structure of the dataset: variable types, missing values, and basic distributions. The `skimr` package provides the `skim()` function, which offers a richer summary than `summary()` we used before.
+
+```{r}
+install.packages("skimr")
+```
 
 ```{r}
 # install.packages("skimr") # you only need to install once
@@ -331,11 +339,23 @@ ggplot(data = hvi_tidy_NA_remove %>%
 
 Please modify the above histogram code to explore different forms of histograms, such as using `geom_dotplot()`.
 
+#### To Do 2
+
 ```{r}
-# TODO
+ggplot(data = hvi_tidy_NA_remove %>%
+         filter(Date == as.Date("2025-08-31")), aes(x = Popu2024)) +
+  geom_dotplot( 
+    bins = 2, 
+    dotsize= 2, 
+    stackratio = .8,
+    fill = "white",
+    stroke = 2
+  ) +
+  labs(title = "Histograms of Metropolitan Statistical Area Population", x = "Population (2024)", y = "Count of Cities") +
+  theme_minimal()
 ```
 
-#### Boxplots
+####   Boxplots
 
 A box and whisker plot (also referred to as boxplot) provides a compact summary of the distribution of a variable. A standard boxplot consists of:
 
@@ -373,9 +393,58 @@ ggplot(
 
 Please add additional layer of `geom_jitter()` to the above boxplot code. This layer will display individual data points. There are two important arguments for `geom_jitter()`: `width =` and `height =`. What's the purpose of those two arguments?
 
+#### To Do 3a
+
 ```{r}
 # TODO
+ggplot(
+  data = hvi_tidy_NA_remove %>%
+    filter(Date == as.Date("2025-08-31")),
+  aes(y = Popu2024, x = Region)
+) +
+geom_jitter(
+  width = 0.5,
+  height= 0.5
+)
+  +
+  geom_boxplot(
+    fill = "black",  
+    alpha = 0.3,       # transparency
+    width = 0.5        # box width
+  ) +
+  labs(
+    title = "Boxplot of City Population by Census Bureau Regions",
+    y = "Population (2024)",
+    x = NULL
+  ) +
+  theme_minimal()
 ```
+
+#### To Do 3b
+
+```{r}
+ggplot(
+  data = hvi_tidy_NA_remove %>%
+    filter(Date == as.Date("2025-08-31")),
+  aes(y = Popu2024, x = Region)
+) +
+  geom_jitter(width = 0.2, height = 0) +
+  geom_boxplot(
+    fill = "black",  
+    alpha = 0.3,       # transparency
+    width = 0.5        # box width
+  ) +
+  labs(
+    title = "Boxplot of City Population by Census Bureau Regions",
+    y = "Population (2024)",
+    x = NULL
+  ) +
+  theme_minimal()
+```
+
+##### The answer : 
+
+The jitter function adds dotted data points that may be the individual data points. The height and width function as the jitter directions or the random movement along the axises of the graph. It serves to help viewer see overlapping data points. (additional confirmation source <https://ggplot2.tidyverse.org/reference/geom_jitter.html> ).
 
 #### Cumulative Distribution Functions (CDF)
 
@@ -480,6 +549,12 @@ This is not a complete list of Exploratory Data Analysis (EDA). We did not touch
 
 Carefully review and run all code chunks. You are encouraged to modify the arguments to explore how they affect the visualizations. Reply “yes” below once you have reviewed and tested them.
 
+#### To Do 4
+
+```{r}
+print("Yes, I have reviewed and tested the chunks")
+```
+
 ### 📚 TODO: Explore National Mortgage Database
 
 **7 points**
@@ -492,6 +567,8 @@ Using [the National Mortgage Database (NMBD)](https://www.fhfa.gov/data/national
 3.  Create 3 \~ 4 diagrams that would make sense as well as tell an interesting story. For example, you may want to connect state-level statistics from ACS with the NMDB data (make sure you are comparing data from the same year).
 4.  Add one paragraph explaining your results and charts.
 
+#### To Do 5
+
 ```{r}
 # TODO
 ```
@@ -499,6 +576,3 @@ Using [the National Mortgage Database (NMBD)](https://www.fhfa.gov/data/national
 ## Acknowledgement
 
 The materials are developed by [Haoyu Yue](www.yuehaoyu.com) based materials from [Dr. Feiyang Sun at UC San Diego](https://fsun.ucsd.edu), Siman Ning and Christian Phillips at University of Washington, [Dr. Charles Lanfear at University of Cambridge](https://clanfear.github.io).
-
-## Test on Zoo
-

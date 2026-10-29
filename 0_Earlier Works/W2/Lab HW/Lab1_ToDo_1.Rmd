@@ -1,0 +1,154 @@
+---
+title: "Lab1_1_CV"
+author: "DyahS"
+date: "2026-10-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# To Do 1
+
+## **Resume / CV**
+
+#### Dyah Srigutomo
+
+### Education
+
+| Degree | School | Year of Graduation |
+|------------------------|------------------------|------------------------|
+| Master of Urban Planning | University of Washington | **2027** |
+| Bachelor of Science in Urban and Regional Planning | Institut Teknologi Bandung | **2022** |
+
+### Experience
+
+1.  Junior Urban Designer at Shirvano Consulting (**2023-2025**)
+2.  Urban Designer Intern at Center of Urban Design Studies (**2022-2023**)
+
+# To Do 2
+
+```{r, echo = FALSE}
+birthday <- "1999-10-16"
+print(birthday)
+```
+
+```{r}
+class(birthday)
+```
+
+```{r}
+birthdayDate <- as.Date(birthday, "%Y-%m-%d")
+print (birthdayDate)
+class(birthdayDate )
+```
+
+```{r}
+today <-
+Sys.Date()
+format(today, format="%Y-%m-%d")
+```
+
+```{r}
+ImportantDate <-c(birthdayDate, today)
+
+print(ImportantDate)
+class(ImportantDate)
+```
+
+```{r}
+today[1]-birthdayDate
+```
+
+```{r}
+(today[1]-birthdayDate)/365
+
+```
+
+#### Finishing the Sentence
+
+Today is
+
+```{r}
+print (today)
+```
+
+it has been
+
+```{r}
+(today[1]-birthdayDate)/365
+```
+
+years since my Birthday
+
+# To Do 3
+
+#### Trial
+
+```{r}
+getwd()
+```
+
+```{r}
+install.packages("tidycensus")
+install.packages("tidyverse")
+```
+
+```{r}
+library(tidycensus)
+library(tidyverse)
+
+census_api_key("1552c4682980965c78450030c32abe3034fd1425",overwrite = TRUE, install = TRUE)
+
+readRenviron("~/.Renviron")
+
+```
+
+#### ACS Data Overlook
+
+The data that I pulled from the ACS is 2024 Median Household Income in King County, Washington State. The depth for data is based on census tract.
+
+```{r}
+  MedianHHInc <- get_acs(geography = "tract", table = "B19013", state = "53", county = "033", year = 2024, label = TRUE)
+
+  write_csv(MedianHHInc, "MedianHHInc.csv")
+  
+```
+
+#### Statistical Summary
+
+```{r}
+  class(MedianHHInc$estimate)
+  mean(MedianHHInc$estimate, na.rm = TRUE)
+  min(MedianHHInc$estimate, na.rm = TRUE)
+  max(MedianHHInc$estimate, na.rm = TRUE)
+  quantile(MedianHHInc$estimate, na.rm = TRUE)
+```
+
+It can be summarized from the basic descriptive analysis for 2024 Median Household Income in King County, Washington State :
+
+1.  The average Median Household Income in King County, Washington is \$135,814
+2.  The Lowest Median Household Income in King County, Washington is \$17,500
+3.  The Highest Median Household Income in King County, Washington is \$25,000
+4.  The average Median Household Income in King County falls just below on the upper quantile ( 75% is approximately around \$166,921).

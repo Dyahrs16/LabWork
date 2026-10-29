@@ -1,0 +1,1 @@
+"0","g <- ggplot(hvi_pnw, aes(x = Date, y = HVI, color = RegionName)) # will not show the plots"

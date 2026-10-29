@@ -1,0 +1,3 @@
+"0","hvi_tidy_Interpolate1 <- hvi_tidy |> "
+"0","  mutate(hvi_zoo = na.approx(HVI)) |> "
+"0","  view()"
