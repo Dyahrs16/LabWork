@@ -429,7 +429,7 @@ library(tidyverse)
 ```
 
 ```{r, include=FALSE}
-census_api_key(Sys.getenv("CENSUS_API_KEY"))
+census_api_key(Sys.getenv(" CENSUS_API_KEY"))
 ```
 
 Get ACS data for King County, Washington State, using the `get_acs()` function. The `table` argument specifies the ACS table code (B25075) for housing value. The `geography` argument specifies the level of geography (tract-level). The `state` and `county` arguments specify the state and county codes. The `year` argument specifies the year of the ACS data. The `labels` argument is set to TRUE to include label descriptions.
